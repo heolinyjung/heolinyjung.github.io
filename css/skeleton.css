@@ -125,7 +125,8 @@ body {
   line-height: 1.6;
   font-weight: 400;
   font-family: "Lato", sans-serif;
-  color: #222; }
+  color: #222;
+}
 
 
 /* Typography
@@ -160,7 +161,7 @@ h6 { font-size: 1.5rem; line-height: 1.6;  letter-spacing: 0; color: #444;}
 p {
   margin-top: 0;
     font-size: 1.3rem;
-    color: #777;
+    color: #555;
     letter-spacing: .04rem;
     line-height: 1.7;
 }
@@ -312,6 +313,10 @@ ol ul {
   margin: 1.5rem 0 1.5rem 3rem;
   font-size: 90%; }
 li {
+    font-size: 1.3rem;
+    color: #333;
+    letter-spacing: .04rem;
+    line-height: 1.7;
   margin-bottom: 1rem; }
 
 
