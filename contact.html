@@ -56,19 +56,19 @@
                 </div>
                 
                 <div class="six columns" style="margin-top: 3%">
-                    <!-- subject select
+                    <!-- subject select -->
+                    <script>
+                    </script>
                     <label for="reason">Reason for contacting</label>
-                    <select class="u-full-width" id="reason">
-                        <option value="Option 1">Audio Engineering Inquiry</option>
-                        <option value="Option 2">Programming Inquiry</option>
-                        <option value="Option 3">Other</option>
+                    <select class="u-full-width" id="reason" name="_subject">
+                        <option value="Audio Engineering Inquiry">Audio Engineering Inquiry</option>
+                        <option value="Programming Inquiry">Programming Inquiry</option>
+                        <option value="Other">Other</option>
                     </select>
--->
                 </div>
             </div>
             <div class="row">
                 <div class="twelve columns">
-                    <input type="hidden" name="_subject" value="Heoliny Jung Website Inquiry" />
                     <label for="userMessage">Message</label>
                     <textarea class="u-full-width" placeholder="Type message here" id="userMessage" name="message"></textarea>
                     <!-- snedCopyButton
@@ -78,11 +78,9 @@
                     </label>
 -->
                 </div>
-                <form action="?" method="POST">
                     <div class="g-recaptcha" data-sitekey="6LcO83kaAAAAAHC6k6kq-n057OqoTwcvhjxMsc0I"></div>
                     <br/>
-                    <input class="button-primary" type="submit" value="Submit">
-                </form>
+                    <input type="submit" value="Submit">
             </div>
         </form>
 
