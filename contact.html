@@ -24,6 +24,14 @@
     
     <!-- ReCAPTCHA SCRIPT ------------------------------------- -->
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script>
+        window.onload = function() { 
+            var el = document.getElementById('g-recaptcha-response'); 
+            if (el) { 
+                el.setAttribute('required', 'required'); 
+            } 
+        }
+    </script>
 </head>
 <body>
     <div class="container" style="margin-bottom: 5%">
@@ -57,8 +65,6 @@
                 
                 <div class="six columns" style="margin-top: 3%">
                     <!-- subject select -->
-                    <script>
-                    </script>
                     <label for="reason">Reason for contacting</label>
                     <select class="u-full-width" id="reason" name="_subject">
                         <option value="Audio Engineering Inquiry">Audio Engineering Inquiry</option>
@@ -77,10 +83,15 @@
                         <span class="label-body">Send a copy to yourself</span>
                     </label>
 -->
-                </div>
+                    <br>
                     <div class="g-recaptcha" data-sitekey="6LcO83kaAAAAAHC6k6kq-n057OqoTwcvhjxMsc0I"></div>
                     <br/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="twelve columns">
                     <input type="submit" value="Submit">
+                </div>
             </div>
         </form>
 
