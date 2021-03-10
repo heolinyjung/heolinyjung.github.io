@@ -36,28 +36,41 @@
     <!-- JQUERY FOR REDIRECT (no formspree submission page) ------------------------------------- -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
+//        function formSubmit(e){
+//            e.preventDefault();
+//            const form = $(this);
+//            const email = $("#emailInput");
+//            const subject = $("#reason");
+//            const message = $("#userMessage");
+//            const captcha = $()
+//            $.ajax({
+//                url: "https://formspree.io/f/xdopqgna",
+//                method: "POST",
+//                dataType: "json",
+//                data: {
+//                    email: email.val(),
+//                    message: message.val(),
+//                    "_subject": subject.val()
+//                },
+//                success: function(data,status,JQXHR){
+//                    window.location.replace("/submitted");
+//                },
+//                error: function(JQXHR,status,error){
+//                    const err = JQXHR.responseJSON.error;
+//                    alert(`Bonk! There was an error submitting the form: ${err}`);
+//                }
+//            });
+//        }
         function formSubmit(e){
-            e.preventDefault();
-            const form = $(this);
-            const email = $("#emailInput");
-            const subject = $("#reason");
-            const message = $("#userMessage");
             $.ajax({
-                url: "https://formspree.io/f/xdopqgna",
-                method: "POST",
                 dataType: "json",
-                data: {
-                    email: email.val(),
-                    message: message.val(),
-                    "_subject": subject.val()
-                },
-                success: function(data,status,JQXHR){
-                    window.location.replace("/submitted");
-                },
-                error: function(JQXHR,status,error){
-                    alert("Bonk! There was an error submitting the form.");
-                }
+                method: "POST",
+                url: "//formspree.io/f/xdopqgna",
+                data: $(this).serialize(),
+            }).done(function(data) {
+                console.log(data);
             });
+            event.preventDefault();
         }
         window.onload=function(){
             const form = $("#contactForm");
