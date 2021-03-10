@@ -32,6 +32,38 @@
             } 
         }
     </script>
+    
+    <!-- JQUERY FOR REDIRECT (no formspree submission page) ------------------------------------- -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function formSubmit(e){
+            e.preventDefault();
+            const form = $(this);
+            const email = $("#emailInput");
+            const subject = $("#reason");
+            const message = $("#userMessage");
+            $.ajax({
+                url: "https://formspree.io/f/xdopqgna",
+                method: "POST",
+                dataType: "json",
+                data: {
+                    email: email.val(),
+                    message: message.val(),
+                    "_subject": subject.val()
+                },
+                success: function(data,status,JQXHR){
+                    window.location.replace("/submitted");
+                },
+                error: function(JQXHR,status,error){
+                    alert("Bonk! There was an error submitting the form.");
+                }
+            });
+        }
+        window.onload=function(){
+            const form = $("#contactForm");
+            form.submit(formSubmit);
+        }
+    </script>
 </head>
 <body>
     <div class="container" style="margin-bottom: 5%">
@@ -56,7 +88,7 @@
         </div>
         
         <!-- FORM -->
-        <form action="https://formspree.io/f/xdopqgna" method="POST">
+        <form id="contactForm">
             <div class="row">
                 <div class="six columns" style="margin-top: 3%">
                     <label for="emailInput">Your Email</label>
