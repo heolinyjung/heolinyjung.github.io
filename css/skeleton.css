@@ -246,7 +246,7 @@ input[type="url"],
 input[type="password"],
 textarea,
 select {
-  height: 76px;
+  height: 38px;
   padding: 6px 10px; /* The 6px vertically centers text on FF, ignored by Webkit */
   background-color: #111;
   border: 1px solid #D1D1D1;
@@ -266,7 +266,7 @@ textarea {
      -moz-appearance: none;
           appearance: none; }
 textarea {
-  min-height: 65px;
+  min-height: 180px;
   padding-top: 6px;
   padding-bottom: 6px; }
 input[type="email"]:focus,
