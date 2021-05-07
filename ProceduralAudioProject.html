@@ -68,7 +68,7 @@
             <div class="twelve columns" align="left">
                 <p>
                     Cave Diver is a collaborative tech demo that highlights the possibilities of procedural 3D game generation, developed by myself, Arthur Hertz and Mark Borkowski as part of a Game Development course at Indiana University - Bloomington. 
-                    It was first conceptualized as an underwater horror/exploration game where players would navigate a system of procedurally-generated caves to escape an unknown foe.
+                    It was first conceptualized as an underwater horror/exploration game where players would navigate a system of procedurally-generated caves to escape a mysterious foe.
                     <br><br>Though most of the story and design hasn't been fleshed-out yet, we have been successful in the development and implementation of the technical aspects of the project that will end up being the backbone of the experience.
                 </p>
             </div>
@@ -95,8 +95,8 @@
             <div class="seven columns" align="left">
                 <p>
                     I first attempted signal generation in Unity using <a href="https://www.benjaminoutram.com/blog/2018/7/13/procedural-audio-in-unity-noise-and-tone">this tutorial</a>. 
-                    While successful, it was a very limited implementation, and attempting to make any interesting or convincing sounds from it would be an arduous task. 
-                    The Unity audio engine and built-in effects library is limited, and the signal generators were somewhat glitchy and had limited parameters.
+                    While successful, it was a very limited implementation, and attempting to make any interesting or convincing sounds from it would be a difficult task. 
+                    The Unity audio engine and built-in effects library is somewhat limited, and the way I was able to implement the signal generators only allowed for a small amount of mutable parameters.
                 </p>
             </div>
         </div>
@@ -121,7 +121,8 @@
                 <p>
                     The main synthesizer I ended up using in Wwise was the <a href="https://www.audiokinetic.com/library/edge/?source=Help&id=wwise_synth_one_plug_in">Wwise Synth One</a>. 
                     It's a simple yet effective synth with enough parameters to create some great sounds. For context, the Unity signal generator could only produce one sine tone at a time and only had three parameters: frequency, volume, and noise level. 
-                    <br><br>As you can see, each Synth One has many, many parameters, and each can have up to two frequencies with different wave shapes (Sine, Triangle, Square, and Sawtooth).
+                    <br><br>As you can see, each Synth One has many, many parameters, as well as two signal generators that can be played simultaneously. 
+                    Each signal generator also has a variety of wave shape options (Sine, Triangle, Square, and Sawtooth).
                 </p>
             </div>
             <div class="five columns" align="right" style="margin-top: 1%">
@@ -161,16 +162,17 @@
             <div class="twelve columns" align="left">
                 <p>
                     RTPC stands for "Real Time Parameter Control". It's a term used in Wwise to describe a parameter (represented by an integer) that can be changed during runtime to modify aspects of the audio. 
-                    These aspects could be anything, from as simple as volume to as complex as reverb Early Reflection amount. If theres an adjustable parameter in Wwise, it can almost always able to be affected by an RTPC.
+                    These aspects could be anything, from as simple as volume to as complex as reverb Early Reflection amount. If there's an adjustable parameter in Wwise, it can almost always able to be affected by an RTPC.
                 </p>
             </div>
         </div>
         <div class="row">
             <div class="twelve columns" align="left">
                 <p>
-                    The Wwise documentation does not do an incredible job in informing you how to make changes to RTPC's through code in Unity. 
+                   Even with the Wwise documentation's guidance, I had a difficult time manipulating RTPC's from scripts in Unity. 
                     At first, I tried serializing an RTPC field like I did with the Wwise Events so that I could relate the RTPC to a game object in the editor. 
-                    <br><br>It turns out that RTPC controls (also known as "GameSyncs") do not show up in the Wwise Picker. You have to hard-code their names into a script in order to have them be affected.
+                    <br><br>It turns out that RTPC controls (also known as "GameSyncs") do not show up in the Wwise Picker in Unity. 
+                    After much experimentation, I figured out that the correct method is to hard-code the RTPC names into a script.
                 </p>
             </div>
         </div>
@@ -187,7 +189,9 @@
         <div class="row">
             <div class="twelve columns" align="left">
                 <p>
-                    After finally getting control of RTPC's, however, I finally had all the pieces I needed to create an incredible procedural soundscape.
+                    "Drone_Speed" is the name of the GameSync in Wwise that I am manipulating, and "pitchParameterValue" is the value I want to set it to. 
+                    The "AkCurveInterpolation.AkCurveInterpolation_Linear" is a Wwise algorithm that smooths out transisitions between values so that the RTPC changes gradually rather than abruptly.
+                    <br><br>After finally getting control of RTPC's, however, I finally had all the pieces I needed to create an incredible procedural soundscape.
                 </p>
             </div>
         </div>
@@ -206,11 +210,12 @@
                     With just the reverb, it was not incredibly noticible, so I added in a toggle-able test tone that revs up/revs down depending on how large the space is. 
                     This can be found in the Unity project as a component of the Player object.
                     <br><br>After tweaking some effects and parameters in Wwise, this was the end product. 
-                    I used a flanger and pitch shifter on the reverb to make it sound more "underwater".
+                    In addition to the various tweaks to the signal generator sources, I used a flanger and pitch shifter on the main reverb to make it sound more underwater-like.
                     <br><br>
                     <iframe src="https://drive.google.com/file/d/1-CKxbBjs91b4HgbBmtvq251979ho48Ed/preview" allowfullscreen="allowfullscreen" style="width: 100%; height: 100%"></iframe>
-                    <br><br>In the future, I think this "Room Size" parameter could also be used for adaptive music. 
+                    <br><br>In the future, I think the "Room Size" parameter could be very useful for adaptive music. 
                     Having the tone of an ambient soundtrack change depending on how big of a space the player is in would make for an incredibly interesting sonic experience, especially because the sound system must adapt to a procedurally-generated cave system.
+                    <br><br>I was very happy with what our team accomplished here, and am excited to dive deeper into experimental game audio programming in the future.
                 </p>
             </div>
         </div>
