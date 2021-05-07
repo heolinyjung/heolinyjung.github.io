@@ -54,16 +54,16 @@
             <div class="twelve columns" align="center">
                 <h01><b>The Oli EQ 3</b></h01>
                 <h4></h4> <br>
-                <img src="images/OliEQ3.png" alt="Oli EQ 3 Screenshot 1"> <br><br><br>
+                <img src="images/OliEQ3.png" alt="Oli EQ 3 Screenshot 1"><br><br><br>
                 <h6>Developing a parametric EQ audio plug-in for Wwise</h6>
             </div>
         </div>
-        <hr>
+        <br>
         <div class="row">
             <div class="twelve columns" align="left">
                 <p>
                     <b>The Oli EQ 3</b> is a simple yet effective 1-band parametric EQ plug-in for use in the game audio middleware Wwise, completed for a Game Development class at Indiana University.
-                    <br><br>The majority of the programming was done in C++ with Visual Studio, and the main algorithm was derived from an implementation provided in <a href="ParametricEQPaper.pdf">this paper</a>.
+                    <br><br>The majority of the programming was done in C++ with Visual Studio, and the main DSP algorithm was derived from an implementation provided in <a href="ParametricEQPaper.pdf">this paper</a>.
                 </p>
             </div>
         </div>
@@ -74,142 +74,225 @@
             </div>
         </div>
         <div class="row">
-            <div class="twelve columns" align="left">
+            <div class="seven columns" align="left">
                 <p>
-                    When I first decided to start this project, my aim was to develop an audio plug-in that I could implement and instatiate inside Wwise.
-                    This meant utilizing audio signal generators and synthesizers to process and produce audio in real-time. 
-                    At first, I wanted to accomplish this through native Unity (i.e. without any middleware), and to do so I dove deep into research in Unity's built in audio engine as well as some third-party tools.
+                    When I first decided to start this project, my aim was to develop an audio plug-in that I could implement and instatiate inside Wwise. 
+                    I decided to move towards a parametric EQ, as it was on the simpler side but required a bit more attention than the average digital signal processing algorithm.
+                    <br><br>My first experiments were centered around the Wwise SDK <a href="https://www.audiokinetic.com/library/edge/?source=SDK&id=code_effectplugin_runthrough.html">Developing a Lowpass Filter</a> tutorial. 
+                    This guide was incredibly helpful, but also presented some challenges mostly due to the documentation layout.
                 </p>
             </div>
-        </div>
-        <div class="row">
             <div class="five columns" align="left" style="margin-top: 1%">
-                <iframe src="https://drive.google.com/file/d/11TCuR_SFLp-eRfqthHDBzKgFqkfgGo8D/preview" allowfullscreen="allowfullscreen" style="width: 100%; height: 100%"></iframe>
+                <img src="images/EQBasic.jpg" alt="Basic EQ forms">
             </div>
-            <div class="seven columns" align="left">
+        </div>
+        <div class="row">
+            <div class="twelve columns" align="left">
                 <p>
-                    I first attempted signal generation in Unity using <a href="https://www.benjaminoutram.com/blog/2018/7/13/procedural-audio-in-unity-noise-and-tone">this tutorial</a>. 
-                    While successful, it was a very limited implementation, and attempting to make any interesting or convincing sounds from it would be a difficult task. 
-                    The Unity audio engine and built-in effects library is somewhat limited, and the way I was able to implement the signal generators only allowed for a small amount of mutable parameters.
+                    The tutorial leads you through three main processing steps:
+                    <ul>1. Construct a new plugin <br>
+                        <pre><code>python "%WWISEROOT%/Scripts/Build/Plugins/wp.py" new --effect -a author_name -n PluginName 
+    -t "Full Plugin Name" -d "Plugin Description"</code></pre></ul>
+                    <ul>2. Build the plugin <br>
+                        <pre><code>python "%WWISEROOT%/Scripts/Build/Plugins/wp.py" build -c Release -x x64 -t vc160 Authoring</code></pre></ul>
+                    <ul>3. Package and bundle <br>
+                        <pre><code>python "%WWISEROOT%/Scripts/Build/Plugins/wp.py" package ... --version=YEAR.X.X.XXXX
+python "%WWISEROOT%/Scripts/Build/Plugins/wp.py" generate-bundle --version=YEAR.X.X.XXXX</code></pre></ul>
                 </p>
             </div>
         </div>
         <div class="row">
             <div class="twelve columns" align="left">
                 <p>
-                    I then attempted to implement a more robust sythesizer, <a href="https://puredata.info/">PureData</a>, into Unity as a script and component. 
-                    I ran into another dead-end here, as the only references for implementation I could find was <a href="http://engineering.weplaydots.com/2017/01/20/Generating-Noises-with-Pure-Data.html">not working for Windows</a>. 
-                    <br><br>With deadlines approaching, I decided to pivot to something more familiar, the game audio middleware Wwise. 
-                    I had previous experience with it and enjoyed the program's workflow, and there happened to be a few built-in synthesizers that would make my quest a bit more achievable.
+                    <b>Step 1</b> constructs various Visual Studio solutions and C++ scripts that you can modify to complete your implementation. 
+                    <b>Step 2</b> builds the project for a version of your choice - Debug, Release, or Profile - as indicated by the "-c" parameter. 
+                    <b>Step 3</b> packages all the files into deliverables and generates a .json file that can be read by the Wwise Launcher for easy installation into your local Wwise libraries.
+                    <br><br>Following the documentation, I kept ending up with the same error. I could get it installed into Wwise but the functionality was not making the journey. 
+                    The only custom parameter in the plug-in should be called "Frequency". Instead it would only show "Placeholder", which was the parameter that the Wwise SDK implements by default on new plug-in builds.
                 </p>
             </div>
         </div>
-        <hr>
-        <div class="row" style="margin-top: 3%">
-            <div class="twelve columns" align="left">
-                <h5><b>The Wisest Choice: The Wwise Synth One</b></h5>
-            </div>
-        </div>
-        <div class="row">
-            <div class="seven columns" align="left">
-                <p>
-                    The main synthesizer I ended up using in Wwise was the <a href="https://www.audiokinetic.com/library/edge/?source=Help&id=wwise_synth_one_plug_in">Wwise Synth One</a>. 
-                    It's a simple yet effective synth with enough parameters to create some great sounds. For context, the Unity signal generator could only produce one sine tone at a time and only had three parameters: frequency, volume, and noise level. 
-                    <br><br>As you can see, each Synth One has many, many parameters, as well as two signal generators that can be played simultaneously. 
-                    Each signal generator also has a variety of wave shape options (Sine, Triangle, Square, and Sawtooth).
-                </p>
-            </div>
-            <div class="five columns" align="right" style="margin-top: 1%">
-                <img src="images/synthone.png" alt="Wwise Synth One screenshot">
-            </div>
-        </div>
-        <div class="row">
-            <div class="twelve columns" align="left">
-                <p>
-                    Putting my audio engineer chops to use, I dialed in the synths to craft sounds for each source I wanted to test. 
-                    Our team's vision for the game was to have the player control a small drone, so I made a "Drone Motor" sound that would rev up when the player moved and down when they were stationary.  
-                    <br><br>What ended up coming to fruition first was a simple demo, where players can move with WASD, and the "motor" sound would react to player input:
-                </p>
-            </div>
-        </div>
-        <div class="row">
+        <div class="row" style="margin-top: 1%">
             <div class="twelve columns" align="center">
-                <iframe src="https://drive.google.com/file/d/1s2xc-nLTsNnUgrkxhIHXI0K42UPKO0wv/preview" allowfullscreen="allowfullscreen" style="width: 100%; height: 100%"></iframe>
+                <img src="images/placeholder_error.png" alt="Oli EQ 3 Placeholder Error">
             </div>
         </div>
         <br>
         <div class="row">
             <div class="twelve columns" align="left">
                 <p>
-                    The real challenge here was getting used to the <a href="https://www.audiokinetic.com/library/edge/?source=Unity&id=index.html">Wwise/Unity integration</a>. 
-                    The initial process was simple enough - just open the Wwise launcher and hit the "Integrate into Unity Project" button - but the thing that really halted my progress was using code for RTPC control.
+                    Modifying "Placeholder" did not effect the source sound at all, and the range on the parameter didn't match the range defined in my code.
+                    Clearly, my changes were not making it over to the installed version of my plug-in.
+                </p>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="twelve columns" align="left">
+                <p>
+                    I uninstalled the plug-in using the Wwise Launcher, built for Debug instead of Release, and reinstalled.
+                    <br><br>Still Placeholder.
+                    <br><br>I did the same thing but tried re-building for Release.
+                    <br><br>Still Placeholder.
+                    <br><br>I tried building the Visual Studio solutions, even though the documentation didn't say to do so.
+                    <br><br>Again, still Placeholder.
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="twelve columns" align="left">
+                <p>
+                    Nothing seemed to be working, so I dug a bit deeper into my Wwise libraries.
+                    I found some odd behaviours, such as when I uninstalled my EQ plug-in from the Launcher, parts of it would stick around and could even be recalled from within a Wwise project.
+                    I was running a minor update behind the most recent version of Wwise, so to bypass this perpetuation problem and maybe fix some bugs, I installed a new version.
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="twelve columns" align="left">
+                <p>
+                    I also decided to re-order the process and not run any build scripts until my implementation was complete.
+                    I wrote all the algorithms and made all the changes that I needed to, built each Visual Studio solution, and then ran the build script and the package and bundle scripts.
+                </p>
+            </div>
+        </div>
+        <div class="row" style="margin-top: 1%">
+            <div class="twelve columns" align="center">
+                <img src="images/cutoffchangeworks.png" alt="The Cutoff Works!">
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="twelve columns" align="left">
+                <p>
+                    Finally, success! Not only did the UI match the parameters in code, but the sound was being correctly manipulated by the DSP.
+                    <br><br>I then wanted to test how the implementation would behave if I made modifications and reinstalled the plug-in.
+                    What I found is that I could change aspects of the plug-in, reinstall using the Wwise Launcher, and have those changes appear in the Wwise Editor (unlike before with Placeholder).
                 </p>
             </div>
         </div>
         <hr>
         <div class="row" style="margin-top: 3%">
             <div class="twelve columns" align="left">
-                <h5><b>RTPC Rundown</b></h5>
+                <h5><b>Parametric Parameters</b></h5>
             </div>
         </div>
         <div class="row">
-            <div class="twelve columns" align="left">
+            <div class="five columns" align="left" style="margin-top: 1%">
+                <img src="images/PEQDemo.gif" alt="What My EQ Should Do">
+            </div>
+            <div class="seven columns" align="left">
                 <p>
-                    RTPC stands for "Real Time Parameter Control". It's a term used in Wwise to describe a parameter (represented by an integer) that can be changed during runtime to modify aspects of the audio. 
-                    These aspects could be anything, from as simple as volume to as complex as reverb Early Reflection amount. If there's an adjustable parameter in Wwise, it can almost always able to be affected by an RTPC.
+                    Taking what I learned from the Lowpass Filter implementation, I began working on my parametric EQ.
+                    Here, you can see a single-band parametric EQ in action.
+                    There are three parameters to control: <b>Gain</b>, <b>Frequency</b>, and <b>Q</b>.
+                    <br><br><b>Gain</b> is the height/depth of the peak of the EQ (i.e. how amplified or reduced frequencies inside the band will be).
                 </p>
             </div>
         </div>
         <div class="row">
             <div class="twelve columns" align="left">
                 <p>
-                   Even with the Wwise documentation's guidance, I had a difficult time manipulating RTPC's from scripts in Unity. 
-                    At first, I tried serializing an RTPC field like I did with the Wwise Events so that I could relate the RTPC to a game object in the editor. 
-                    <br><br>It turns out that RTPC controls (also known as "GameSyncs") do not show up in the Wwise Picker in Unity. 
-                    After much experimentation, I figured out that the correct method is to hard-code the RTPC names into a script.
+                    <b>Frequency</b> is the frequency where the peak is centered.
+                    <br><br><b>Q</b>, also known as bandwidth or "quality", is the width of the frequency band that will be affected by the gain.
+                    A higher Q means a narrower band.
                 </p>
             </div>
         </div>
         <div class="row">
             <div class="twelve columns" align="left">
-                For example, here is the script I implemented into the Update function of my player movement script to have it change the pitch of the motor (rev it up) when the player began moving:
-                    <pre><code>if (pitchParameterValue < 100) {
-    pitchParameterValue += 1f;
-    AkSoundEngine.SetRTPCValue("Drone_Speed", pitchParameterValue, gameObject, 
-            50, AkCurveInterpolation.AkCurveInterpolation_Linear);
-}</code></pre>
+                <p>
+                    Using these parameters and the equations described in the paper <a href="ParametricEQPaper.pdf">here</a>, I developed an implementation for the EQ within the Wwise framework.
+                    <ul><pre><code>void OliEQ3FX::Execute(AkAudioBuffer* io_pBuffer)
+{
+    const AkUInt32 uNumChannels = io_pBuffer->NumChannels();
+
+    AkUInt16 uFramesProcessed;
+    for (AkUInt32 i = 0; i < uNumChannels; ++i)
+    {
+        AkReal32* AK_RESTRICT pBuf = (AkReal32* AK_RESTRICT)io_pBuffer->GetChannel(i);
+
+        uFramesProcessed = 0;
+        while (uFramesProcessed < io_pBuffer->uValidFrames)
+        {
+            // Execute DSP in-place here
+            // y[n] =  m_previousOutput[i] (will update after execution)
+            // x[n] = pBuf[uFramesProcessed] (will update after execution: becomes the processed frame)
+            // y[n-1] =  m_previousOutput[i] (before execution)
+            m_xn = pBuf[uFramesProcessed];
+            m_ynm1 = m_previousOutput[i];
+            m_yn = m_previousOutput[i] = pBuf[uFramesProcessed] = (m_b0 * m_xn + m_b1 * 
+                m_xnm1 + m_b2 * m_xnm2 - m_a1 * m_ynm1 - m_a2 * m_ynm2) / m_a0;
+
+            // move values up
+            m_xnm2 = m_xnm1;
+            m_xnm1 = m_xn;
+            m_ynm2 = m_ynm1;
+            m_ynm1 = m_yn;
+
+            // Recalculate coefficients
+            // TODO: Optimize this/encapsulation in another class
+
+            //EQ intermediate params
+            m_A = pow(10.0f, m_pParams->RTPC.fGain / 40.0f);
+            m_w = (2.0f * M_PI * m_pParams->RTPC.fFrequency) / m_sampleRate;
+            m_sn = sin(m_w);
+            m_cs = cos(m_w);
+            m_alpha = m_sn / (2.0f * m_pParams->RTPC.fQ);
+
+            //EQ coefficients
+            m_b0 = 1.0f + m_alpha * m_A;
+            m_b1 = -2.0f * m_cs;
+            m_b2 = 1.0f - m_alpha * m_A;
+            m_a0 = 1.0f + m_alpha / m_A;
+            m_a1 = -2.0f * m_cs;
+            m_a2 = 1 - m_alpha / m_A;
+
+            ++uFramesProcessed;
+        }
+    }
+}</code></pre></ul>
+                </p>
             </div>
         </div>
         <div class="row">
             <div class="twelve columns" align="left">
                 <p>
-                    "Drone_Speed" is the name of the GameSync in Wwise that I am manipulating, and "pitchParameterValue" is the value I want to set it to. 
-                    The "AkCurveInterpolation.AkCurveInterpolation_Linear" is a Wwise algorithm that smooths out transisitions between values so that the RTPC changes gradually rather than abruptly.
-                    <br><br>After finally getting control of RTPC's, however, I finally had all the pieces I needed to create an incredible procedural soundscape.
+                    Here, <code>pBuf</code> represents the array of values that represents the audio sample stream.
+                    One thing that I found interesting and took some time to figure out is that almost all of the processing is done in place on the sample buffer.
+                    Before <code>m_yn = m_previousOutput[i] = pBuf[uFramesProcessed] = ...</code>, <code>pBuf[uFramesProcessed]</code> represents the input sample, but after execution is assigned the output sample.
+                    This is because the samples we need to process are already in <code>pBuf</code>, and it is completely acceptable and even necessary to overwrite those samples in-place, as <code>pBuf</code> is also our output. 
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="twelve columns" align="left">
+                <p>
+                    <code>Execute</code> is a method all Wwise audio plug-ins have that houses all the plug-in's DSP.
+                    Other files that must be modified for the plug-in to function are pretty straight-forward.
+                    Those changes mostly involve switching out parameter names and defining parameter ranges.
                 </p>
             </div>
         </div>
         <hr>
         <div class="row" style="margin-top: 3%">
             <div class="twelve columns" align="left">
-                <h5><b>Wrapping It Up</b></h5>
+                <h5><b>Change That Sound!</b></h5>
             </div>
         </div>
         <div class="row">
             <div class="twelve columns" align="left">
                 <p>
-                    Working with my teammates, I implemented my procedural solutions to Mark's player movement script and Arthur's prodecural cave system. 
-                    We also worked together to develop a way to determine the size of the space the player is in using raycasts. 
-                    <br><br>This was incredibly useful for my audio, as it allowed me to be able to change the size of the reverb and other effect parameters to make the space sound bigger or smaller as the player moved through the tunnels. 
-                    With just the reverb, it was not incredibly noticible, so I added in a toggle-able test tone that revs up/revs down depending on how large the space is. 
-                    This can be found in the Unity project as a component of the Player object.
-                    <br><br>After tweaking some effects and parameters in Wwise, this was the end product. 
-                    In addition to the various tweaks to the signal generator sources, I used a flanger and pitch shifter on the main reverb to make it sound more underwater-like.
-                    <br><br>
-                    <iframe src="https://drive.google.com/file/d/1-CKxbBjs91b4HgbBmtvq251979ho48Ed/preview" allowfullscreen="allowfullscreen" style="width: 100%; height: 100%"></iframe>
-                    <br><br>In the future, I think the "Room Size" parameter could be very useful for adaptive music. 
-                    Having the tone of an ambient soundtrack change depending on how big of a space the player is in would make for an incredibly interesting sonic experience, especially because the sound system must adapt to a procedurally-generated cave system.
-                    <br><br>I was very happy with what our team accomplished here, and am excited to dive deeper into experimental game audio programming in the future.
+                    The fully-functional plug-in can be found on GitHub <a href="https://github.com/olijng7/B453_GameDev_OliEQ3">here</a>.
+                    Consult the README for instructions on how to install the OliEQ3 on your own Wwise installation.
+                    <br>
+                    <br>
+                    <iframe src="https://drive.google.com/file/d/1aqjY8nnSpbB2INUWiWb80G4GHinsNa2H/preview" allowfullscreen="allowfullscreen" style="width: 100%; height: 100%"></iframe>
+                    <br>
+                    <br>
+                    In the future, I would like to optimize my implementation a bit, as the code could definitely be encapsulated and interpolated at certain points like the method for recalculating the coefficients.
+                    The Wwise SDK gives a few more examples of how you can modify the base code to have it operate more smoothly as well, which I would be interested to dive into.
+                    I also would love to develop a multi-band EQ or a compressor as a next step in my plug-in creation quest.
                 </p>
             </div>
         </div>
