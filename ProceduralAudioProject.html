@@ -47,61 +47,175 @@
 
         <div class="row">
             <div class="twelve columns" align="right">
-                <p>April 22, 2021</p>
+                <p>May 6, 2021</p>
             </div>
         </div>
         <div class="row">
             <div class="twelve columns" align="center">
                 <h01><b>Cave Diver</b></h01>
                 <h4>Procedural Audio Madness</h4> <br>
-                <img src="images/pt-op.jpg" alt="placehoder"> <br><br><br>
+                <img src="images/CaveDiverMain.png" alt="Cave Diver Screenshot 1"> <br><br><br>
                 <h6>An exploration into procedural audio implementation using Unity and Wwise</h6>
             </div>
         </div>
-        
+        <hr>
         <div class="row" style="margin-top: 3%">
             <div class="twelve columns" align="left">
-                <h5>It's only natural that a procedurally generated game has procedurally generated audio...</h5>
-            </div>
-        </div>
-        <br>
-        <div class="row">
-            <div class="seven columns" align="left">
-                <p>
-                    Or at least, that was what I decided on when Cave Diver was first proposed.<br> <br>
-                    <br><br>
-                </p>
-            </div>
-            <div class="five columns" align="right">
-                <img src="images/pt-op.jpg" alt="placehoder">
+                <h5><b>Underwater Cave Immersion</b></h5>
             </div>
         </div>
         <div class="row">
             <div class="twelve columns" align="left">
                 <p>
-                    The goal of the project was not necessarily to produce a complete, polished experience, but rather to build something that showcases the advanced topic you chose to research.
-                    I didn't have much experience in Unity, however I was confident enough about my coding prowess and understanding of audio to take the leap and become the team's sound designer and programmer.<br><br>
-                    When discussing our desired research topics, a few ideas bounced around. Mark wanted to work on water shaders, Arthur had been experimenting with 3D procedurally-generated spaces, and I had become caught up in a few GDC talks about procedural music and sound.
+                    Cave Diver is a collaborative tech demo that highlights the possibilities of procedural 3D game generation, developed by myself, Arthur Hertz and Mark Borkowski as part of a Game Development course at Indiana University - Bloomington. 
+                    It was first conceptualized as an underwater horror/exploration game where players would navigate a system of procedurally-generated caves to escape an unknown foe.
+                    <br><br>Though most of the story and design hasn't been fleshed-out yet, we have been successful in the development and implementation of the technical aspects of the project that will end up being the backbone of the experience.
+                </p>
+            </div>
+        </div>
+        <hr>
+        <div class="row" style="margin-top: 3%">
+            <div class="twelve columns" align="left">
+                <h5><b>Developing an Immersive Procedural Audio System</b></h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="twelve columns" align="left">
+                <p>
+                    My goal was to implement a completely procedural audio system. 
+                    This meant utilizing audio signal generators and synthesizers to process and produce audio in real-time. 
+                    At first, I wanted to accomplish this through native Unity (i.e. without any middleware), and to do so I dove deep into research in Unity's built in audio engine as well as some third-party tools.
                 </p>
             </div>
         </div>
         <div class="row">
-            <div class="five columns" align="left">
-                <img src="images/pt-op.jpg" alt="placehoder">
+            <div class="five columns" align="left" style="margin-top: 1%">
+                <iframe src="https://drive.google.com/file/d/11TCuR_SFLp-eRfqthHDBzKgFqkfgGo8D/preview" allowfullscreen="allowfullscreen" style="width: 100%; height: 100%"></iframe>
             </div>
             <div class="seven columns" align="left">
                 <p>
-                    
-                    <b>Have all the audio be procedurally generated.</b><br>
-
-
+                    I first attempted signal generation in Unity using <a href="https://www.benjaminoutram.com/blog/2018/7/13/procedural-audio-in-unity-noise-and-tone">this tutorial</a>. 
+                    While successful, it was a very limited implementation, and attempting to make any interesting or convincing sounds from it would be an arduous task. 
+                    The Unity audio engine and built-in effects library is limited, and the signal generators were somewhat glitchy and had limited parameters.
                 </p>
             </div>
         </div>
-        <br>
+        <div class="row">
+            <div class="twelve columns" align="left">
+                <p>
+                    I then attempted to implement a more robust sythesizer, <a href="https://puredata.info/">PureData</a>, into Unity as a script and component. 
+                    I ran into another dead-end here, as the only references for implementation I could find was <a href="http://engineering.weplaydots.com/2017/01/20/Generating-Noises-with-Pure-Data.html">not working for Windows</a>. 
+                    <br><br>With deadlines approaching, I decided to pivot to something more familiar, the game audio middleware Wwise. 
+                    I had previous experience with it and enjoyed the program's workflow, and there happened to be a few built-in synthesizers that would make my quest a bit more achievable.
+                </p>
+            </div>
+        </div>
         <hr>
-        
-        <div class="row" style="margin-top: 10%">
+        <div class="row" style="margin-top: 3%">
+            <div class="twelve columns" align="left">
+                <h5><b>The Wisest Choice: The Wwise Synth One</b></h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="seven columns" align="left">
+                <p>
+                    The main synthesizer I ended up using in Wwise was the <a href="https://www.audiokinetic.com/library/edge/?source=Help&id=wwise_synth_one_plug_in">Wwise Synth One</a>. 
+                    It's a simple yet effective synth with enough parameters to create some great sounds. For context, the Unity signal generator could only produce one sine tone at a time and only had three parameters: frequency, volume, and noise level. 
+                    <br><br>As you can see, each Synth One has many, many parameters, and each can have up to two frequencies with different wave shapes (Sine, Triangle, Square, and Sawtooth).
+                </p>
+            </div>
+            <div class="five columns" align="right" style="margin-top: 1%">
+                <img src="images/synthone.png" alt="Wwise Synth One screenshot">
+            </div>
+        </div>
+        <div class="row">
+            <div class="twelve columns" align="left">
+                <p>
+                    Putting my audio engineer chops to use, I dialed in the synths to craft sounds for each source I wanted to test. 
+                    Our team's vision for the game was to have the player control a small drone, so I made a "Drone Motor" sound that would rev up when the player moved and down when they were stationary.  
+                    <br><br>What ended up coming to fruition first was a simple demo, where players can move with WASD, and the "motor" sound would react to player input:
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="twelve columns" align="center">
+                <iframe src="https://drive.google.com/file/d/1s2xc-nLTsNnUgrkxhIHXI0K42UPKO0wv/preview" allowfullscreen="allowfullscreen" style="width: 100%; height: 100%"></iframe>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="twelve columns" align="left">
+                <p>
+                    The real challenge here was getting used to the <a href="https://www.audiokinetic.com/library/edge/?source=Unity&id=index.html">Wwise/Unity integration</a>. 
+                    The initial process was simple enough - just open the Wwise launcher and hit the "Integrate into Unity Project" button - but the thing that really halted my progress was using code for RTPC control.
+                </p>
+            </div>
+        </div>
+        <hr>
+        <div class="row" style="margin-top: 3%">
+            <div class="twelve columns" align="left">
+                <h5><b>RTPC Rundown</b></h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="twelve columns" align="left">
+                <p>
+                    RTPC stands for "Real Time Parameter Control". It's a term used in Wwise to describe a parameter (represented by an integer) that can be changed during runtime to modify aspects of the audio. 
+                    These aspects could be anything, from as simple as volume to as complex as reverb Early Reflection amount. If theres an adjustable parameter in Wwise, it can almost always able to be affected by an RTPC.
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="twelve columns" align="left">
+                <p>
+                    The Wwise documentation does not do an incredible job in informing you how to make changes to RTPC's through code in Unity. 
+                    At first, I tried serializing an RTPC field like I did with the Wwise Events so that I could relate the RTPC to a game object in the editor. 
+                    <br><br>It turns out that RTPC controls (also known as "GameSyncs") do not show up in the Wwise Picker. You have to hard-code their names into a script in order to have them be affected.
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="twelve columns" align="left">
+                For example, here is the script I implemented into the Update function of my player movement script to have it change the pitch of the motor (rev it up) when the player began moving:
+                    <pre><code>if (pitchParameterValue < 100) {
+    pitchParameterValue += 1f;
+    AkSoundEngine.SetRTPCValue("Drone_Speed", pitchParameterValue, gameObject, 
+            50, AkCurveInterpolation.AkCurveInterpolation_Linear);
+}</code></pre>
+            </div>
+        </div>
+        <div class="row">
+            <div class="twelve columns" align="left">
+                <p>
+                    After finally getting control of RTPC's, however, I finally had all the pieces I needed to create an incredible procedural soundscape.
+                </p>
+            </div>
+        </div>
+        <hr>
+        <div class="row" style="margin-top: 3%">
+            <div class="twelve columns" align="left">
+                <h5><b>Wrapping It Up</b></h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="twelve columns" align="left">
+                <p>
+                    Working with my teammates, I implemented my procedural solutions to Mark's player movement script and Arthur's prodecural cave system. 
+                    We also worked together to develop a way to determine the size of the space the player is in using raycasts. 
+                    <br><br>This was incredibly useful for my audio, as it allowed me to be able to change the size of the reverb and other effect parameters to make the space sound bigger or smaller as the player moved through the tunnels. 
+                    With just the reverb, it was not incredibly noticible, so I added in a toggle-able test tone that revs up/revs down depending on how large the space is. 
+                    This can be found in the Unity project as a component of the Player object.
+                    <br><br>After tweaking some effects and parameters in Wwise, this was the end product. 
+                    I used a flanger and pitch shifter on the reverb to make it sound more "underwater".
+                    <br><br>
+                    <iframe src="https://drive.google.com/file/d/1-CKxbBjs91b4HgbBmtvq251979ho48Ed/preview" allowfullscreen="allowfullscreen" style="width: 100%; height: 100%"></iframe>
+                    <br><br>In the future, I think this "Room Size" parameter could also be used for adaptive music. 
+                    Having the tone of an ambient soundtrack change depending on how big of a space the player is in would make for an incredibly interesting sonic experience, especially because the sound system must adapt to a procedurally-generated cave system.
+                </p>
+            </div>
+        </div>
+        <hr>      
+        <div class="row" style="margin-top: 5%">
             <div class="twelve columns" align="center" style="color:#444">
                 Copyright Heoliny Jung 2021
             </div>
