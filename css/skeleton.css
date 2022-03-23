@@ -181,7 +181,7 @@ firstName { font-size: 4.0rem; line-height: 1.25;  letter-spacing: -.3rem; color
 lastName { font-size: 4.0rem; line-height: 1.25;  letter-spacing: -.3rem; color: var(--last-name-color);}
 /* tag { font-size: 1.5rem; line-height: 1.3;  letter-spacing: .3rem; color: #888;} */
 h01 { font-size: 4rem; line-height: 1.25;  letter-spacing: 0.1rem; color: var(--main-header-color);}
-h1 { font-size: 3.3rem; line-height: 1.25;  letter-spacing: -.1rem; color: var(--main-header-color);}
+h1 { font-size: 3.3rem; line-height: 1.10;  letter-spacing: -.1rem; color: var(--main-header-color);}
 h2 { font-size: 2.9rem; line-height: 1.25; letter-spacing: -.1rem; color: var(--main-header-color);}
 h3 { font-size: 2.7rem; line-height: 1.2;  letter-spacing: -.1rem; color: var(--main-header-color);}
 h4 { font-size: 2.3rem; line-height: 1.2; letter-spacing: -.06rem; color: var(--main-header-color);}
@@ -440,8 +440,8 @@ form {
 /* Misc
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 hr {
-  margin-top: 3rem;
-  margin-bottom: 3.5rem;
+  margin-top: 2rem;
+  margin-bottom: 3rem;
   border-width: 0;
   border-top: 1px solid #E1E1E1; }
 
