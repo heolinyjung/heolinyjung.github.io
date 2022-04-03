@@ -127,7 +127,7 @@
   transition: var(--button-color) 2s;
   --button-font-color: #ccc;
   transition: var(--button-font-color) 2s;
-  --li-font-color: #888;
+  --li-font-color: #777;
   transition: var(--li-font-color) 2s;
 }
 
