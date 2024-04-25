@@ -190,8 +190,8 @@ h6 { font-size: 1.7rem; line-height: 0.9;  letter-spacing: .04rem; color: var(--
 
 /* Larger than phablet */
 @media (min-width: 550px) {
-    firstName { font-size: 11.0rem; }
-    lastName { font-size: 11.0rem; }
+    firstName { font-size: 11.0rem; letter-spacing: -.4rem;}
+    lastName { font-size: 11.0rem; letter-spacing: -.4rem;}
     tag { font-size: 2.8rem; letter-spacing: 1rem;}
     h01 { font-size: 6rem; letter-spacing: 0.1rem;}
   h1 { font-size: 5.3rem; }
