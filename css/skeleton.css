@@ -441,13 +441,14 @@ hr {
   margin-top: 2rem;
   margin-bottom: 3rem;
   border-width: 0;
-  border-top: 2px solid var(--main-header-color); }
+  border-top: 2px solid;
+  color: var(--main-header-color); }
 
 .works-line {
   width: 100%;
-  border-top: 2px solid black;
+  border-top: 2px solid;
   margin-top: 5.5%;
-}
+  color: var(--main-header-color); }
 
 /* Clearing
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
