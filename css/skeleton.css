@@ -156,7 +156,7 @@ https://css-tricks.com/a-complete-guide-to-dark-mode-on-the-web/
 */
 @media (prefers-color-scheme: light) {
   body {
-    background-color: #fce7c7;
+    background-color: #fcecd4;
   }
   :root {
     --main-header-color: #222;
