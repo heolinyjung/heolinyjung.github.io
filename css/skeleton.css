@@ -189,10 +189,10 @@ h5 { font-size: 1.9rem; line-height: 1;  letter-spacing: -.03rem; color: var(--m
 h6 { font-size: 1.7rem; line-height: 0.9;  letter-spacing: .04rem; color: var(--main-header-color);}
 
 /* Larger than phablet */
-@media (min-width: 550px) {
-    firstName { font-size: 11.0rem; letter-spacing: -.4rem;}
-    lastName { font-size: 11.0rem; letter-spacing: -.4rem;}
-    tag { font-size: 2.8rem; letter-spacing: 1rem;}
+@media (min-width: 620px) {
+    firstName { font-size: 11.0rem; letter-spacing: -.5rem;}
+    lastName { font-size: 11.0rem; letter-spacing: -.5rem;}
+    tag { font-size: 2.8rem; letter-spacing: 0.8rem;}
     h01 { font-size: 6rem; letter-spacing: 0.1rem;}
   h1 { font-size: 5.3rem; }
   h2 { font-size: 5.3rem; }
@@ -209,15 +209,6 @@ p {
     letter-spacing: .1rem;
     line-height: 1.5;
 }
-
-
-/* Links
-–––––––––––––––––––––––––––––––––––––––––––––––––– */
-a {
-  color: #1EAEDB; }
-a:hover {
-  color: #0FA0CE; }
-
 
 /* Buttons
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
@@ -277,6 +268,13 @@ input[type="button"].button-primary:focus {
   color: #FFF;
   background-color: #1EAEDB;
   border-color: #1EAEDB; }
+
+/* Links
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+a {
+  color: #1EAEDB; }
+a:hover {
+  color: #0FA0CE; }
 
 
 /* Forms
@@ -443,11 +441,12 @@ hr {
   margin-top: 2rem;
   margin-bottom: 3rem;
   border-width: 0;
-  border-top: 1px solid #E1E1E1; }
+  border-top: 2px solid var(--main-header-color); }
+
 .works-line {
-  border: 3px --main-header-color;
   width: 100%;
-  height: 0px;
+  border-top: 2px solid var(--main-header-color);
+  margin-top: 5.5%;
 }
 
 /* Clearing
