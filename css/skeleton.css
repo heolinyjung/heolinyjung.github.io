@@ -145,7 +145,7 @@ body {
   font-weight: 300;
   font-family: "Lato", sans-serif;
   color: var(--main-font-color);
-  background-color: #111;
+  background-color: #4c043c;
   transition: background-color 2s;
 }
 
@@ -156,7 +156,7 @@ https://css-tricks.com/a-complete-guide-to-dark-mode-on-the-web/
 */
 @media (prefers-color-scheme: light) {
   body {
-    background-color: #fff;
+    background-color: #f9eddb;
   }
   :root {
     --main-header-color: #222;
