@@ -445,7 +445,7 @@ hr {
 
 .works-line {
   width: 100%;
-  border-top: 2px solid var(--main-header-color);
+  border-top: 2px solid black;
   margin-top: 5.5%;
 }
 
